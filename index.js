@@ -130,7 +130,9 @@ app.route('/register')
 	.post((req, res) => {
 		let {email, cnpj, name, password} = req.body;
 		if(email && password && !(email in database.users)) {
-			database.users[email] = password;
+			database.users[email] = {
+				password
+			};
 			res.redirect("/");
 		} else {
 			res.status(406);
@@ -145,8 +147,9 @@ app.route('/login')
 	.post((req, res) => {
 		let {email, password} = req.body;
 		try {
-			if(password == database.users[email]) {
+			if(password == database.users[email].password) {
 				req.session.loggedin = true;
+				req.session.userid = email;
 				res.redirect("/menu");
 			} else {
 				throw new Error("Wrong password");
@@ -167,6 +170,15 @@ app.get('/menu', (req, res) => {
 
 app.route('/notifications')
 	.get((req, res) => {
+		let notifications = database.notifications;
+		let filtered = [];
+		for(i in notifications) {
+			if(notifications[i].to == req.session.userid) {
+				filtered.push(notifications[i]);
+			}
+		}
+		console.log(filtered);
+		res.send(filtered);
 		//	render a list of notifications, user may click on them to see better
 	})
 
