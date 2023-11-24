@@ -2,7 +2,81 @@ const port = 3000;
 
 var database = {
 	users: {
-		user: "password"
+		"business@mail.com": {
+			password: "abc123",
+			type: "business",
+			cnpj: "030301234"
+		},
+		"admin@mail.com": {
+			password: "abc123",
+			type: "admin"
+		}
+	},
+	notifications: [
+		{
+			to: "business@mail.com"
+			message: "Hello folk",
+			status: "unread"
+		},
+		{
+			to: "admin@mail.com",
+			message: "Welcome to Bokushi",
+			status: "unread"
+		}
+	],
+	workers: [ 
+		{
+			name: "Carlos Boca",
+			cpf: "123456789-12"
+			business: "business@mail.com"
+		},
+		{
+			name: "Louro da Silva",
+			cpf: "123451234-56"
+			business: "business@mail.com"
+		}
+	],
+	fields: [
+		"NR10",
+		"NR20",
+		"antecedentes",
+		"nome da mãe",
+		"rg"		
+	],
+	submissions: [
+		{
+			worker: "123456789-12",
+			field: "nome da mãe",
+			data: "maria alves",
+			status: "pendente"
+		},
+		{
+			worker: "123456789-12",
+			field: "NR10",
+			data: "Foto da NR10",
+			status: "aprovado"
+		},
+		{
+			worker: "123451234-56",
+			field: "nome da mãe",
+			data: "joana almeida",
+			status: "aprovado"
+		}
+	],
+	agenda: [
+		worker: "123456789-12",
+		event: "manutenção elétrica",
+		status: "pendente",
+		entrance: new Date()
+	],
+	events: {
+		"manutenção elétrica": [
+			"NR10"
+		],
+		"manutenção modem": [
+			"rg",
+			"antecedentes"
+		]
 	}
 }
 
