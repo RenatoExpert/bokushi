@@ -1,23 +1,43 @@
 const port = 3000;
 
+var database = {
+	users: {
+		user: "password"
+	}
+}
+
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+app.use((req, res, next) => {
+	console.log(req.method, req.originalUrl, req.params, req.body);
+	next();
+});
+
 app.get('/', (req, res) => {
 	res.render('home');
-	//	Render login and register buttons
-	//	res.send("Bokushi - Outsourcing manager");
 });
 
 app.route('/register')
 	.get((req, res) => {
-		//	render subscription form
+		res.render('register');
 	})
 	.post((req, res) => {
 		//	check information and create account
+		let {email, cnpj, name, password} = req.body;
+		if(email && password && !(email in database.users)) {
+			database.users[email] = password;
+			res.redirect("/");
+		} else {
+			res.status(406);
+			res.send("Dados Invalidos");
+		} 
 	});
 
 app.route('/login')
