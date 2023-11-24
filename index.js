@@ -57,7 +57,7 @@ app.route('/login')
 	});
 
 app.get('/menu', (req, res) => {
-	res.send("Main menu");
+	res.render("menu");
 	//	If user is a business
 	//	render options: notifications, workers, agenda
 	
