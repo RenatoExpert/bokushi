@@ -1,0 +1,29 @@
+{
+  "name": "bokushi",
+  "version": "1.0.0",
+  "description": "Outsourcing management web application",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renatoexpert/bokushi.git"
+  },
+  "keywords": [
+    "outsource",
+    "manager",
+    "administration",
+    "business"
+  ],
+  "author": "Renato Ramos Ribeiro Araújo",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/renatoexpert/bokushi/issues"
+  },
+  "homepage": "https://github.com/renatoexpert/bokushi#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
