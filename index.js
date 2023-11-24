@@ -108,7 +108,7 @@ app.use((req, res, next) => {
 		let loggedin = req.session.loggedin;
 		if(loggedin && unknown_path) {
 			res.redirect("/menu");
-		else if (!loggedin && !unknown_path) {
+		} else if (!loggedin && !unknown_path) {
 			res.redirect("/");
 		} else {
 			next();
