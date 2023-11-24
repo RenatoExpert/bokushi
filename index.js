@@ -14,7 +14,7 @@ var database = {
 	},
 	notifications: [
 		{
-			to: "business@mail.com"
+			to: "business@mail.com",
 			message: "Hello folk",
 			status: "unread"
 		},
@@ -27,12 +27,12 @@ var database = {
 	workers: [ 
 		{
 			name: "Carlos Boca",
-			cpf: "123456789-12"
+			cpf: "123456789-12",
 			business: "business@mail.com"
 		},
 		{
 			name: "Louro da Silva",
-			cpf: "123451234-56"
+			cpf: "123451234-56",
 			business: "business@mail.com"
 		}
 	],
@@ -64,10 +64,12 @@ var database = {
 		}
 	],
 	agenda: [
-		worker: "123456789-12",
-		event: "manutenção elétrica",
-		status: "pendente",
-		entrance: new Date()
+		{
+			worker: "123456789-12",
+			event: "manutenção elétrica",
+			status: "pendente",
+			entrance: new Date()
+		}
 	],
 	events: {
 		"manutenção elétrica": [
