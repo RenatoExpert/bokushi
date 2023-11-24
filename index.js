@@ -219,7 +219,23 @@ app.route('/workers')
 
 app.route('/workers/:id')
 	.get((req, res) => {
-		//	Show information about a worker
+		let id = req.params.id;
+		let worker = database.workers[req.params.id];
+		let submissions = [];
+		let table = database.submissions;
+		let fields = database.fields;
+		for(i in table) {
+			let cpf = worker.cpf;
+			let reff = table[i]
+			if(cpf == reff.worker) {
+				submissions.push(reff);
+			}
+		}
+		res.render("worker", {
+			worker,
+			submissions,
+			fields
+		})
 	})
 	.put((req, res) => {
 		//	Change information about a worker
