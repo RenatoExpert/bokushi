@@ -263,7 +263,16 @@ app.route('/submissions')
 		//	Render form to make new submission
 	})
 	.post((req, res) => {
-		//	Add new submission
+		let { data, field, cpf } = req.body;
+		let submission = {
+			status: "pendente",
+			data,
+			field,
+			worker: cpf
+		};
+		database.submissions.push(submission);
+		let previous_url = req.header("Referer");
+		res.redirect(previous_url);
 	})
 
 app.route('/submissions/:id')

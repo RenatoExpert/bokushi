@@ -1,0 +1,50 @@
+<html>
+	<body>
+		<section>
+			<h2>Cadastro do colaboradores</h2>
+			<h3> <%= worker.name %> </h3>
+			<p> CPF <%= worker.cpf %> </p>
+			<form method="DELETE">
+				<input type="submit" value="Apagar cadastro"/>
+			</form>
+		</section>
+		<section>
+			<h2>Documentação do colaborador</h2>
+				<% for(i in submissions) { %>
+					<h4>
+						<%= submissions[i].field %>
+					</h4>
+					<p>
+						<%= submissions[i].data %>
+					</p>
+					<p>
+						<%= submissions[i].status %>
+					</p>
+				<% } %>
+			<h3>Enviar nova documentação</h3>
+			<form action="/submissions" method="POST">
+				<input name="cpf" id="cpf" value="<%= worker.cpf %>" style="visibility: hidden"/>
+				<label for="field">Tipo de documento</label>
+				<select name="field" id="field">
+					<% for(i in fields) { %>
+						<option value="<%= fields[i] %>"> <%= fields[i] %> </option>
+					<% } %>
+				</select>
+				<label for="data">Conteúdo</label>
+				<input type="text" id="data" name="data"/>
+				<input type="submit" value="Enviar Documento"/>
+			</form>
+		</section>
+	</body>
+	<style>
+		body {
+			text-align: center;
+		}
+		div {
+			border-style: solid
+		}
+	</style>
+
+	
+	</body>
+</html>
