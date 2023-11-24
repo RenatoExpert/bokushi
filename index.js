@@ -29,7 +29,6 @@ app.route('/register')
 		res.render('register');
 	})
 	.post((req, res) => {
-		//	check information and create account
 		let {email, cnpj, name, password} = req.body;
 		if(email && password && !(email in database.users)) {
 			database.users[email] = password;
@@ -42,14 +41,23 @@ app.route('/register')
 
 app.route('/login')
 	.get((req, res) => {
-		//	render login form
+		res.render('login');
 	})
 	.post((req, res) => {
-		//	check credentials and login
-		//	if successful, router to menu
+		let {email, password} = req.body;
+		try {
+			if(password == database.users[email]) {
+				res.redirect("/menu");
+			} else {
+				throw new Error("Wrong password");
+			}
+		} catch(e) {
+			res.send(e);
+		}
 	});
 
 app.get('/menu', (req, res) => {
+	res.send("Main menu");
 	//	If user is a business
 	//	render options: notifications, workers, agenda
 	
