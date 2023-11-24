@@ -84,10 +84,16 @@ var database = {
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
@@ -95,6 +101,23 @@ app.use((req, res, next) => {
 	console.log(req.method, req.originalUrl, req.params, req.body);
 	next();
 });
+
+app.use((req, res, next) => {
+	if('loggedin' in req.session) {
+		let unknown_path = ["/", "/login", "/register"].includes(req.originalUrl);
+		let loggedin = req.session.loggedin;
+		if(loggedin && unknown_path) {
+			res.redirect("/menu");
+		else if (!loggedin && !unknown_path) {
+			res.redirect("/");
+		} else {
+			next();
+		}
+	} else {
+		req.session.loggedin = false;
+		next();
+	}
+})
 
 app.get('/', (req, res) => {
 	res.render('home');
@@ -123,6 +146,7 @@ app.route('/login')
 		let {email, password} = req.body;
 		try {
 			if(password == database.users[email]) {
+				req.session.loggedin = true;
 				res.redirect("/menu");
 			} else {
 				throw new Error("Wrong password");
@@ -240,28 +264,4 @@ app.route('/agenda/:id')
 app.listen (port, status => {
 	console.log(`Running webserver... port:${port}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
