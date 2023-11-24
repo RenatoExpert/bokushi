@@ -207,8 +207,14 @@ app.route('/workers')
 		res.render("workers", { workers: workers_list });
 	})
 	.post((req, res) => {
-		//	Add a new worker
-		//	Needs CPF and name
+		let {name, cpf} = req.body;
+		let business = req.session.userid;
+		database.workers.push({
+			name,
+			cpf,
+			business
+		});
+		res.redirect("/workers");
 	})
 
 app.route('/workers/:id')
