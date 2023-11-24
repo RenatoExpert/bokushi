@@ -1,0 +1,22 @@
+<html>
+	<body>
+		<h2>Notificações</h2>
+		<% for(i in notifications) { %>
+			<a href="/notifications/<%= notifications[i].id  %>">
+				<div>
+					<h3>
+						<%= notifications[i].message %>
+					</h3>
+				</div>
+			</a>
+		<% } %>
+	</body>
+	<style>
+		body {
+			text-align: center;
+		}
+		div {
+			border-style: solid
+		}
+	</style>
+</html>

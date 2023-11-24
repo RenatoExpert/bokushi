@@ -22,6 +22,11 @@ var database = {
 			to: "admin@mail.com",
 			message: "Welcome to Bokushi",
 			status: "unread"
+		},
+		{
+			to: "business@mail.com",
+			message: "Yoyoyo",
+			status: "unread"
 		}
 	],
 	workers: [ 
@@ -174,11 +179,13 @@ app.route('/notifications')
 		let filtered = [];
 		for(i in notifications) {
 			if(notifications[i].to == req.session.userid) {
-				filtered.push(notifications[i]);
+				let spice = notifications[i];
+				spice.id = i;
+				filtered.push(spice);
 			}
 		}
 		console.log(filtered);
-		res.send(filtered);
+		res.render("notifications", { notifications: filtered });
 		//	render a list of notifications, user may click on them to see better
 	})
 
