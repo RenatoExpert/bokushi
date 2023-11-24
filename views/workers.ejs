@@ -1,0 +1,25 @@
+<html>
+	<body>
+		<h2>Colaboradores</h2>
+		<% for(i in workers) { %>
+			<a href="/workers/<%= workers[i].id  %>">
+				<div>
+					<h3>
+						<%= workers[i].name %>
+					</h3>
+				</div>
+			</a>
+		<% } %>
+	</body>
+	<style>
+		body {
+			text-align: center;
+		}
+		div {
+			border-style: solid
+		}
+	</style>
+
+	
+	</body>
+</html>

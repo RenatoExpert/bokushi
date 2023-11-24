@@ -166,11 +166,6 @@ app.route('/login')
 
 app.get('/menu', (req, res) => {
 	res.render("menu");
-	//	If user is a business
-	//	render options: notifications, workers, agenda
-	
-	//	If user is admin
-	//	render options: notifications, fields, events, agenda
 });
 
 app.route('/notifications')
@@ -178,15 +173,14 @@ app.route('/notifications')
 		let notifications = database.notifications;
 		let filtered = [];
 		for(i in notifications) {
-			if(notifications[i].to == req.session.userid) {
-				let spice = notifications[i];
+			let spice = notifications[i];
+			if(spice.to == req.session.userid) {
 				spice.id = i;
 				filtered.push(spice);
 			}
 		}
 		console.log(filtered);
 		res.render("notifications", { notifications: filtered });
-		//	render a list of notifications, user may click on them to see better
 	})
 
 app.route('/notifications/:id')
@@ -196,9 +190,21 @@ app.route('/notifications/:id')
 
 app.route('/workers')
 	.get((req, res) => {
-		//	Busines => Show a list of workers of current business
-		//	Admin => Show a list of all workers
-		//	Click on one list item to go to /workers/:id
+		let table = database.workers;
+		let email = req.session.userid;
+		let account = database.users[email];
+		console.log(email, account, database.users);
+		let workers_list = [];
+		for(i in table) {
+			let worker = table[i];
+			worker.id = i;
+			if(account.type == "admin" || worker.business == email) {
+				workers_list.push(worker);
+			} else {
+				throw new Error("Unknown account type");
+			}
+		}
+		res.render("workers", { workers: workers_list });
 	})
 	.post((req, res) => {
 		//	Add a new worker
