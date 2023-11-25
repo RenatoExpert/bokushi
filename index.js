@@ -257,8 +257,8 @@ app.route('/fields')
 		let email = req.session.userid;
 		let account = database.users[email];
 		if(account.type == "admin") {
-			const table = database.fields;
-			res.send(table);
+			const fields = database.fields;
+			res.render("fields", { fields });
 		} else {
 			res.status(403);
 			res.send();

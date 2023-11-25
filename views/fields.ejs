@@ -1,0 +1,31 @@
+<html>
+	<body>
+		<h2>Requisitos</h2>
+		<% for(i in fields) { %>
+			<a href="/fields/<%= i  %>">
+				<div>
+					<h3>
+						<%= fields[i] %>
+					</h3>
+				</div>
+			</a>
+		<% } %>
+		<h2>Cadastrar novo requisito</h2>
+		<form method="POST">
+			<label for="field">Requisito</label>
+			<input type="text" name="field" id="field"/>
+			<input type="submit" value="Cadastrar"/>
+		</form>
+	</body>
+	<style>
+		body {
+			text-align: center;
+		}
+		div {
+			border-style: solid
+		}
+	</style>
+
+	
+	</body>
+</html>
