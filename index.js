@@ -171,7 +171,8 @@ app.route('/login')
 	});
 
 app.get('/menu', (req, res) => {
-	res.render("menu");
+	const privileges = database.users[req.session.userid].type;
+	res.render("menu", { privileges });
 });
 
 app.route('/notifications')

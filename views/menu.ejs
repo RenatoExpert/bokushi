@@ -18,17 +18,17 @@
 		</a>
 
 		<!-- Now only for admin -->
-
-		<a href='/fields'>
-			<button>
-				Requisitos
-			</button>
-		</a>
-		<a href='/events'>
-			<button>
-				Tipos de marcação
-			</button>
-		</a>
-		
+		<% if(privileges == "admin") { %>
+			<a href='/fields'>
+				<button>
+					Requisitos
+				</button>
+			</a>
+			<a href='/events'>
+				<button>
+					Tipos de marcação
+				</button>
+			</a>
+		<% } %>
 	</body>
 </html>
