@@ -185,7 +185,6 @@ app.route('/notifications')
 				filtered.push(spice);
 			}
 		}
-		console.log(filtered);
 		res.render("notifications", { notifications: filtered });
 	})
 
@@ -199,7 +198,6 @@ app.route('/workers')
 		let table = database.workers;
 		let email = req.session.userid;
 		let account = database.users[email];
-		console.log(email, account, database.users);
 		let workers_list = [];
 		for(i in table) {
 			let worker = table[i];
