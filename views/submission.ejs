@@ -1,0 +1,42 @@
+<html>
+	<body>
+		<section>
+			<h2>Certificações dos colaboradores</h2>
+			<div>
+				<h4>
+					<%= submission.worker %>
+				</h4>
+				<p>
+					<%= submission.field %>
+				</p>
+				<p>
+					<%= submission.data %>
+				</p>
+				<p>
+					<%= submission.status %>
+				</p>
+			</div>
+		</section>
+	</body>
+	<style>
+		body {
+			text-align: center;
+		}
+		div {
+			border-style: solid
+		}
+	</style>
+	<script>
+		const url = window.location.href;
+		const id = <%= submission.id %>;
+		function delete_worker() {
+			var request = new XMLHttpRequest();
+			request.addEventListener("load", () => {
+				alert("Documentação");
+				window.location.href = ".";
+			})
+			request.open("DELETE", url, false)
+			request.send();
+		}
+	</script>
+</html>

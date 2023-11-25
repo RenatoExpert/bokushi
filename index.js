@@ -305,7 +305,17 @@ app.route('/submissions')
 
 app.route('/submissions/:id')
 	.get((req, res) => {
-		//	Render info about a submission
+		const id = req.params.id;
+		var submission = database.submissions[id];
+		submission.id = id;
+		const workers = database.workers;
+		for(i in workers) {
+			if(workers[i].cpf == submission.worker) {
+				submission.worker = workers[i].name; 
+				break;
+			}
+		}
+		res.render("submission", { submission });
 	})
 	.put((req, res) => {
 		//	Business => Update content
