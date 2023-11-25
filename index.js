@@ -107,22 +107,28 @@ app.use((req, res, next) => {
 	next();
 });
 
+//	Ensure session `loggedin` field
 app.use((req, res, next) => {
 	if('loggedin' in req.session) {
-		let unknown_path = ["/", "/login", "/register"].includes(req.originalUrl);
-		let loggedin = req.session.loggedin;
-		if(loggedin && unknown_path) {
-			res.redirect("/menu");
-		} else if (!loggedin && !unknown_path) {
-			res.redirect("/");
-		} else {
-			next();
-		}
 	} else {
 		req.session.loggedin = false;
+	}
+	next();
+});
+
+//	Ensure login for status 401 (Unauthorized)
+app.use((req, res, next) => {
+	let unknown_path = ["/", "/login", "/register"].includes(req.originalUrl);
+	let loggedin = req.session.loggedin;
+	if(loggedin && unknown_path) {
+		res.redirect("/menu");
+	} else if (!loggedin && !unknown_path) {
+		res.status(401);
+		res.redirect("/");
+	} else {
 		next();
 	}
-})
+});
 
 app.get('/', (req, res) => {
 	res.render('home');
