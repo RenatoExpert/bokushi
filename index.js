@@ -265,7 +265,9 @@ app.route('/fields')
 		}
 	})
 	.post((req, res) => {
-		//	Add a new field
+		database.fields.push(req.body.field);
+		res.status(200);
+		res.redirect("/fields");
 	})
 
 app.route('/fields/:id')
