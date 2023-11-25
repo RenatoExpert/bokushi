@@ -278,7 +278,17 @@ app.route('/fields/:id')
 
 app.route('/submissions')
 	.get((req, res) => {
-		//	Render form to make new submission
+		var submissions = database.submissions;
+		const workers = database.workers;
+		for(i in submissions) {
+			for(j in workers) {
+				if(workers[j].cpf == submissions[i].worker) {
+					submissions[i].worker = workers[j].name; 
+					break;
+				}
+			}
+		}
+		res.render("submissions", { submissions });
 	})
 	.post((req, res) => {
 		let { data, field, cpf } = req.body;
