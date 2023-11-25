@@ -249,7 +249,15 @@ app.route('/workers/:id')
 
 app.route('/fields')
 	.get((req, res) => {
-		//	Get list of current available fields
+		let email = req.session.userid;
+		let account = database.users[email];
+		if(account.type == "admin") {
+			const table = database.fields;
+			res.send(table);
+		} else {
+			res.status(403);
+			res.send();
+		}
 	})
 	.post((req, res) => {
 		//	Add a new field
