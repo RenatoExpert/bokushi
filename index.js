@@ -241,7 +241,10 @@ app.route('/workers/:id')
 		//	Change information about a worker
 	})
 	.delete((req, res) => {
-		//	Delete worker
+		let id = req.params.id;
+		database.workers.splice(id, 1);
+		res.status(200);
+		res.send("Usuário excluído");
 	})
 
 app.route('/fields')

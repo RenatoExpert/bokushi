@@ -4,9 +4,7 @@
 			<h2>Cadastro do colaboradores</h2>
 			<h3> <%= worker.name %> </h3>
 			<p> CPF <%= worker.cpf %> </p>
-			<form method="DELETE">
-				<input type="submit" value="Apagar cadastro"/>
-			</form>
+			<button onclick="delete_worker()">Apagar cadastro</button>
 		</section>
 		<section>
 			<h2>Documentação do colaborador</h2>
@@ -46,7 +44,19 @@
 			border-style: solid
 		}
 	</style>
-
-	
-	</body>
+	<script>
+		console.debug("init");
+		const url = window.location.href;
+		function delete_worker() {
+			console.debug("button action");
+			var request = new XMLHttpRequest();
+			request.addEventListener("load", () => {
+				console.debug("request action");
+				alert("Colaborador descadastrado");
+				window.location.href = ".";
+			})
+			request.open("DELETE", url, false)
+			request.send();
+		}
+	</script>
 </html>
