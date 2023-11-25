@@ -15,6 +15,12 @@
 				<p>
 					<%= submission.status %>
 				</p>
+				<button onclick="approve()">
+					Aprovar
+				</button>
+				<button onclick="reject()">
+					Recusar
+				</button>
 			</div>
 		</section>
 	</body>
@@ -28,15 +34,21 @@
 	</style>
 	<script>
 		const url = window.location.href;
-		const id = <%= submission.id %>;
-		function delete_worker() {
+		function update_status(new_state) {
 			var request = new XMLHttpRequest();
 			request.addEventListener("load", () => {
-				alert("Documentação");
+				alert("Documento marcado como " + new_state);
 				window.location.href = ".";
 			})
-			request.open("DELETE", url, false)
-			request.send();
+			request.open("PUT", url, false)
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			request.send(`status=${new_state}`);
+		}
+		function approve() {
+			update_status("aprovado");
+		}
+		function reject() {
+			update_status("recusado");
 		}
 	</script>
 </html>

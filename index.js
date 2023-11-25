@@ -281,6 +281,7 @@ app.route('/submissions')
 		var submissions = database.submissions;
 		const workers = database.workers;
 		for(i in submissions) {
+			submissions[i].id = i; 
 			for(j in workers) {
 				if(workers[j].cpf == submissions[i].worker) {
 					submissions[i].worker = workers[j].name; 
@@ -320,6 +321,11 @@ app.route('/submissions/:id')
 	.put((req, res) => {
 		//	Business => Update content
 		//	Admin => Aprove or deny a submission
+		const new_state = req.body.status;
+		const id = req.params.id;
+		database.submissions[id].status = new_state;
+		res.status(200);
+		res.send();
 	})
 
 app.route('/events')

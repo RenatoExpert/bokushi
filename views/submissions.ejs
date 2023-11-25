@@ -3,20 +3,22 @@
 		<section>
 			<h2>Certificações dos colaboradores</h2>
 			<% for(i in submissions) { %>
-				<div>
-					<h4>
-						<%= submissions[i].worker %>
-					</h4>
-					<p>
-						<%= submissions[i].field %>
-					</p>
-					<p>
-						<%= submissions[i].data %>
-					</p>
-					<p>
-						<%= submissions[i].status %>
-					</p>
-				</div>
+				<a href="/submissions/<%= submissions[i].id %>">
+					<div>
+						<h4>
+							<%= submissions[i].worker %>
+						</h4>
+						<p>
+							<%= submissions[i].field %>
+						</p>
+						<p>
+							<%= submissions[i].data %>
+						</p>
+						<p>
+							<%= submissions[i].status %>
+						</p>
+					</div>
+				</a>
 			<% } %>
 		</section>
 	</body>
