@@ -11,15 +11,17 @@
 		<section>
 			<h2>Documentação do colaborador</h2>
 				<% for(i in submissions) { %>
-					<h4>
-						<%= submissions[i].field %>
-					</h4>
-					<p>
-						<%= submissions[i].data %>
-					</p>
-					<p>
-						<%= submissions[i].status %>
-					</p>
+					<div>
+						<h4>
+							<%= submissions[i].field %>
+						</h4>
+						<p>
+							<%= submissions[i].data %>
+						</p>
+						<p>
+							<%= submissions[i].status %>
+						</p>
+					</div>
 				<% } %>
 			<h3>Enviar nova documentação</h3>
 			<form action="/submissions" method="POST">
