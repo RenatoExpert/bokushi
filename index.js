@@ -330,7 +330,9 @@ app.route('/submissions/:id')
 
 app.route('/events')
 	.get((req, res) => {
-		//	Get a list of possible events
+		const events = database.events;
+		const fields = database.fields;
+		res.render("events", { events, fields });
 	})
 	.post((req, res) => {
 		//	Add a new event

@@ -1,0 +1,39 @@
+<html>
+	<body>
+		<h2>Tipos de agendamento</h2>
+		<% for(event in events) { %>
+			<a href="/events/<%= event %>">
+				<div>
+					<h3>
+						<%= event %>
+					</h3>
+					<p>
+						<%= events[event] %>
+					</p>
+				</div>
+			</a>
+		<% } %>
+		<h2>Cadastrar novo tipo de agendamento</h2>
+		<form method="POST">
+			<label for="name">Tipo de agendamento</label>
+			<input type="text" name="name" id="name" required />
+			<fieldset>
+				<legend>Requisitos</legend>
+				<% for(i in fields) { %>
+					<label for="<%= fields[i] %>"><%= fields[i] %></label>
+					<input type="checkbox" name="<%= fields[i] %>" id="<%= fields[i] %>" value="<%= fields[i] %>"/>
+					<br>
+				<% } %>
+			</fieldset>
+			<input type="submit" value="Cadastrar"/>
+		</form>
+	</body>
+	<style>
+		body {
+			text-align: center;
+		}
+		div {
+			border-style: solid
+		}
+	</style>
+</html>
