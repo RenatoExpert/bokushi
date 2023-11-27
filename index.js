@@ -335,7 +335,26 @@ app.route('/events')
 		res.render("events", { events, fields });
 	})
 	.post((req, res) => {
-		//	Add a new event
+		try {
+			let name;
+			let requirements = [];
+			for(requirement in req.body) {
+				if(requirement == "name") {
+					name = requirement;
+				} else if(database.fields.includes(requirement)) {
+					requirements.push(requirement);
+				} else {
+					throw new Error("Erro no formulário: Campo inválido");
+				}
+			}
+			database.events[name] = requirements;
+			res.status(200);
+			res.redirect("/events");
+		} catch (e) {
+			console.error(e);
+			res.status(400);
+			res.send(e);
+		}
 	})
 
 app.route('/events/:id')
